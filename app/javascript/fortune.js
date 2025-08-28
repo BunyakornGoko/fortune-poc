@@ -152,6 +152,13 @@ document.addEventListener("DOMContentLoaded", function () {
       // Hide previous result (modal)
       fortuneResult.classList.add("hidden")
 
+      // Clear previous results
+      chineseText.innerHTML = ""
+      thaiText.innerHTML = ""
+      prizeNumber.textContent = ""
+      luckyColor.textContent = ""
+      luckyNumbers.textContent = ""
+
       // Animate stick selection
       await animateStickSelection()
 
@@ -240,6 +247,13 @@ document.addEventListener("DOMContentLoaded", function () {
     // Hide result (modal)
     fortuneResult.classList.add("hidden")
     document.body.style.overflow = ""
+
+    // Clear previous results
+    chineseText.innerHTML = ""
+    thaiText.innerHTML = ""
+    prizeNumber.textContent = ""
+    luckyColor.textContent = ""
+    luckyNumbers.textContent = ""
 
     // Reset info items opacity and transform
     const infoItems = document.querySelectorAll(".info-item")
