@@ -213,20 +213,59 @@ body::before {
 .stick {
   width: 40px;
   height: 200px;
-  background: linear-gradient(to bottom, var(--gold), var(--dark-gold));
-  border-radius: 20px 20px 5px 5px;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3),
-    inset 0 -20px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 6px 6px 4px 4px;
+  background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0) 20%
+    ),
+    repeating-linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.06) 0 3px,
+      rgba(255, 255, 255, 0.04) 3px 6px
+    ),
+    linear-gradient(180deg, #d6a86a 0%, #c48a4a 40%, #b17939 70%, #9c642e 100%);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35),
+    inset 0 10px 10px rgba(255, 255, 255, 0.12),
+    inset 0 -16px 12px rgba(0, 0, 0, 0.18);
   animation: stickFloat 4s ease-in-out infinite;
   animation-delay: calc(var(--stick-index, 0) * 0.1s);
 }
 
+.stick::before {
+  /* ปลายแท่งสีแดงเป็นทรงสามเหลี่ยม */
+  content: "";
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 22px solid #b91c1c; /* dark red */
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.25));
+}
+
+.stick::after {
+  /* ปลอกสีแดงด้านบนของไม้ */
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: linear-gradient(180deg, #ef4444 0%, #dc2626 70%, #b91c1c 100%);
+  border-radius: 6px 6px 0 0;
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.25);
+}
+
 .stick:hover {
-  transform: translateY(-10px) rotate(2deg);
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4), 0 0 20px var(--light-gold);
+  transform: translateY(-10px) rotate(1deg) scale(1.02);
+  box-shadow: 0 18px 28px rgba(0, 0, 0, 0.45), 0 0 18px rgba(252, 211, 77, 0.6);
 }
 
 .stick-number {
@@ -234,10 +273,41 @@ body::before {
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
-  font-weight: bold;
-  color: var(--dark-red);
-  font-size: 0.9rem;
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+  font-weight: 800;
+  color: #fff7d6;
+  font-size: 0.95rem;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.35);
+}
+
+.stick-tip-number {
+  position: absolute;
+  top: 10px; /* ย้ายเลขให้อยู่ในส่วนปลอกสีแดง */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff3bf, #ffd76d 60%, #f2c24d);
+  color: #7c2d12;
+  font-weight: 900;
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #b45309;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.7),
+    0 2px 4px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+/* สถานะเน้นและเลือก */
+.stick.highlighted {
+  filter: brightness(1.08) saturate(1.06);
+}
+
+.stick.selected {
+  transform: translateY(-18px) rotate(2deg) scale(1.05);
+  box-shadow: 0 22px 36px rgba(0, 0, 0, 0.5), 0 0 24px rgba(252, 211, 77, 0.8);
 }
 
 @keyframes stickFloat {
