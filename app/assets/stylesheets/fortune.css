@@ -202,12 +202,15 @@ body::before {
 .fortune-sticks {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  gap: 0.5rem;
-  padding: 2rem;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0.8rem 0.6rem;
+  padding: 2rem 1.5rem;
   background: radial-gradient(ellipse, rgba(245, 158, 11, 0.2), transparent);
   border-radius: 20px;
   box-shadow: inset 0 0 20px rgba(245, 158, 11, 0.3),
     0 10px 30px var(--shadow-red);
+  align-items: end;
+  justify-items: center;
 }
 
 .stick {
@@ -997,7 +1000,7 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: hidden; /* ให้ตัดไม้ที่เลยออก */
   position: relative;
 }
 
@@ -1013,8 +1016,8 @@ body::before {
 
 .stick-in-tube {
   position: absolute;
-  width: 6px;
-  height: 120px;
+  width: 5px;
+  height: 110px;
   background: linear-gradient(
     180deg,
     #d6a86a 0%,
@@ -1023,28 +1026,30 @@ body::before {
     #9c642e 100%
   );
   border-radius: 2px;
-  top: 40px;
+  bottom: 15px;
   animation: sticksJumping 0.8s ease-in-out infinite;
+  z-index: 1;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .stick-1 {
-  left: 15px;
+  left: 12px;
   animation-delay: 0s;
 }
 .stick-2 {
-  left: 25px;
+  left: 22px;
   animation-delay: 0.1s;
 }
 .stick-3 {
-  left: 35px;
+  left: 32px;
   animation-delay: 0.2s;
 }
 .stick-4 {
-  left: 45px;
+  left: 42px;
   animation-delay: 0.3s;
 }
 .stick-5 {
-  left: 55px;
+  left: 52px;
   animation-delay: 0.4s;
 }
 
