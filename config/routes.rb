@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   root "fortune#index"
   get "fortune" => "fortune#index"
   post "fortune/draw" => "fortune#draw"
+  post "fortune/reset" => "fortune#reset_numbers"
+  get "fortune/status" => "fortune#status"
 end

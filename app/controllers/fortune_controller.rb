@@ -1,5 +1,6 @@
 class FortuneController < ApplicationController
   def index
+    @remaining_count = FortuneNumber.remaining_count
   end
 
   def draw
@@ -51,15 +52,44 @@ class FortuneController < ApplicationController
     # สุ่มตัวเลขโชคดี
     lucky_numbers = Array.new(6) { rand(1..49) }.uniq.sort
     
-    # สุ่มหมายเลขของรางวัล (1-50 ชิ้น)
-    prize_number = rand(1..50)
+    # สุ่มหมายเลขของรางวัลจากฐานข้อมูลและลบทันที
+    prize_number = FortuneNumber.draw_and_remove!
+    remaining_count = FortuneNumber.remaining_count
     
+    if prize_number
+      render json: {
+        thai_fortune: thai_fortune,
+        chinese_fortune: chinese_fortune,
+        lucky_color: lucky_color,
+        lucky_numbers: lucky_numbers,
+        prize_number: prize_number,
+        remaining_prizes: remaining_count,
+        success: true
+      }
+    else
+      render json: {
+        success: false,
+        message: "ของรางวัลหมดแล้ว! กรุณารีเซ็ตระบบ",
+        remaining_prizes: 0
+      }
+    end
+  end
+
+  # ฟังก์ชันรีเซ็ตหมายเลขทั้งหมด (สำหรับ admin)
+  def reset_numbers
+    FortuneNumber.reset_all!
     render json: {
-      thai_fortune: thai_fortune,
-      chinese_fortune: chinese_fortune,
-      lucky_color: lucky_color,
-      lucky_numbers: lucky_numbers,
-      prize_number: prize_number
+      success: true,
+      message: "รีเซ็ตหมายเลขเสร็จแล้ว! มีหมายเลข 100 ตัวให้สุ่มใหม่",
+      remaining_prizes: FortuneNumber.remaining_count
+    }
+  end
+
+  # ฟังก์ชันเช็คสถานะหมายเลขที่เหลือ
+  def status
+    render json: {
+      remaining_prizes: FortuneNumber.remaining_count,
+      has_prizes: FortuneNumber.any_remaining?
     }
   end
 end
