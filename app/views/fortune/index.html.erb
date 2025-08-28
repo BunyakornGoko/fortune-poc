@@ -42,13 +42,14 @@
     </button>
   </div>
 
-  <!-- Fortune Result -->
-  <div id="fortuneResult" class="fortune-result hidden">
+  <!-- Fortune Result (Modal) -->
+  <div id="fortuneResult" class="fortune-result modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="fortuneTitle">
     <div class="result-container">
       <div class="fortune-paper">
+        <button id="closeResultBtn" class="modal-close-btn" aria-label="ปิดผลลัพธ์">×</button>
         <div class="paper-header">
           <span class="paper-ornament">◆</span>
-          <span class="paper-title">神籤</span>
+          <span id="fortuneTitle" class="paper-title">神籤</span>
           <span class="paper-ornament">◆</span>
         </div>
         
@@ -75,12 +76,12 @@
         <div class="paper-footer">
           <div class="temple-seal">寺</div>
         </div>
+        
+        <button id="drawAgainBtn" class="draw-again-btn">
+          <span>อีกครั้ง</span>
+        </button>
       </div>
     </div>
-    
-    <button id="drawAgainBtn" class="draw-again-btn">
-      <span>อีกครั้ง</span>
-    </button>
   </div>
 
   <!-- Floating Elements -->

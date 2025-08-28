@@ -368,6 +368,45 @@ body::before {
   display: none;
 }
 
+/* ===== MODAL OVERLAY ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  z-index: 2000;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  background: radial-gradient(circle, var(--primary-red), var(--dark-red));
+  color: var(--gold);
+  font-weight: 900;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 12px var(--shadow-red);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px var(--shadow-red);
+  background: radial-gradient(circle, var(--bright-red), var(--primary-red));
+}
+
 .result-container {
   margin-bottom: 2rem;
 }
@@ -643,22 +682,26 @@ body::before {
 }
 
 .draw-again-btn {
-  padding: 1rem 2rem;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  padding: 0.8rem 1.5rem;
   background: linear-gradient(135deg, var(--gold), var(--dark-gold));
   border: 2px solid var(--dark-red);
   border-radius: 25px;
   color: var(--dark-red);
   font-family: "Sarabun", sans-serif;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 5px 15px var(--shadow-gold);
+  box-shadow: 0 4px 12px var(--shadow-gold);
+  z-index: 10;
 }
 
 .draw-again-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px var(--shadow-gold);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 16px var(--shadow-gold);
   background: linear-gradient(135deg, var(--light-gold), var(--gold));
 }
 

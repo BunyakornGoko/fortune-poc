@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // DOM Elements
   const drawFortuneBtn = document.getElementById("drawFortuneBtn")
   const drawAgainBtn = document.getElementById("drawAgainBtn")
+  const closeResultBtn = document.getElementById("closeResultBtn")
   const fortuneResult = document.getElementById("fortuneResult")
   const loadingOverlay = document.getElementById("loadingOverlay")
   const fortuneSticks = document.getElementById("fortuneSticks")
@@ -148,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
       loadingOverlay.classList.remove("hidden")
       playSound("drawing")
 
-      // Hide previous result
+      // Hide previous result (modal)
       fortuneResult.classList.add("hidden")
 
       // Animate stick selection
@@ -178,8 +179,9 @@ document.addEventListener("DOMContentLoaded", function () {
       createParticleExplosion(drawFortuneBtn)
       playSound("fortuneRevealed")
 
-      // Show result with animation
+      // Show result in modal
       fortuneResult.classList.remove("hidden")
+      document.body.style.overflow = "hidden"
 
       // Animate text reveal with typewriter effect
       await Promise.all([
@@ -235,8 +237,17 @@ document.addEventListener("DOMContentLoaded", function () {
       stick.style.boxShadow = ""
     })
 
-    // Hide result
+    // Hide result (modal)
     fortuneResult.classList.add("hidden")
+    document.body.style.overflow = ""
+
+    // Reset info items opacity and transform
+    const infoItems = document.querySelectorAll(".info-item")
+    infoItems.forEach((item) => {
+      item.style.opacity = ""
+      item.style.transform = ""
+      item.style.transition = ""
+    })
 
     // Reset animation delays for a fresh experience
     sticks.forEach((stick, index) => {
@@ -410,6 +421,21 @@ document.addEventListener("DOMContentLoaded", function () {
   // Event Listeners
   drawFortuneBtn.addEventListener("click", drawFortune)
   drawAgainBtn.addEventListener("click", resetFortune)
+  closeResultBtn.addEventListener("click", resetFortune)
+
+  // Close modal when clicking outside paper
+  fortuneResult.addEventListener("click", (e) => {
+    if (e.target === fortuneResult) {
+      resetFortune()
+    }
+  })
+
+  // Close with Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !fortuneResult.classList.contains("hidden")) {
+      resetFortune()
+    }
+  })
 
   // Initialize enhancements
   enhanceStickInteractions()
