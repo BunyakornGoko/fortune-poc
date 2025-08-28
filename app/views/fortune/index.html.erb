@@ -1,0 +1,117 @@
+<% content_for :title, "เสี่ยงเซียมซี - Chinese Fortune" %>
+<% content_for :full_page, true %>
+
+<div class="fortune-container">
+  <!-- Header with Chinese decorations -->
+  <div class="header-section">
+    <div class="chinese-ornament">龍</div>
+    <h1 class="main-title">
+      <span class="chinese-text">求籤問卜</span>
+      <span class="thai-text">เสี่ยงเซียมซี</span>
+    </h1>
+    <div class="chinese-ornament">鳳</div>
+  </div>
+
+  <!-- Fortune Stick Container -->
+  <div class="fortune-stick-container">
+    <div class="temple-background">
+      <div class="incense-smoke"></div>
+      <div class="incense-smoke delay-1"></div>
+      <div class="incense-smoke delay-2"></div>
+    </div>
+    
+    <div class="fortune-sticks" id="fortuneSticks">
+      <% 20.times do |i| %>
+        <div class="stick stick-<%= i + 1 %>" data-stick="<%= i + 1 %>">
+          <div class="stick-number"><%= i + 1 %></div>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="fortune-box">
+      <div class="box-decoration">福</div>
+    </div>
+  </div>
+
+  <!-- Action Button -->
+  <div class="action-section">
+    <button id="drawFortuneBtn" class="draw-fortune-btn">
+      <span class="btn-chinese">求籤</span>
+      <span class="btn-thai">เสี่ยงเซียมซี</span>
+      <div class="btn-glow"></div>
+    </button>
+  </div>
+
+  <!-- Fortune Result -->
+  <div id="fortuneResult" class="fortune-result hidden">
+    <div class="result-container">
+      <div class="fortune-paper">
+        <div class="paper-header">
+          <span class="paper-ornament">◆</span>
+          <span class="paper-title">神籤</span>
+          <span class="paper-ornament">◆</span>
+        </div>
+        
+        <div class="fortune-content">
+          <div class="fortune-text chinese" id="chineseText"></div>
+          <div class="fortune-text thai" id="thaiText"></div>
+        </div>
+        
+        <div class="additional-info">
+          <div class="info-item">
+            <span class="info-label">โชคสี:</span>
+            <span id="luckyColor" class="info-value"></span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">เลขมงคล:</span>
+            <span id="luckyNumbers" class="info-value"></span>
+          </div>
+        </div>
+        
+        <div class="paper-footer">
+          <div class="temple-seal">寺</div>
+        </div>
+      </div>
+    </div>
+    
+    <button id="drawAgainBtn" class="draw-again-btn">
+      <span>อีกครั้ง</span>
+    </button>
+  </div>
+
+  <!-- Floating Elements -->
+  <div class="floating-elements">
+    <div class="floating-symbol symbol-1">福</div>
+    <div class="floating-symbol symbol-2">祿</div>
+    <div class="floating-symbol symbol-3">壽</div>
+    <div class="floating-symbol symbol-4">喜</div>
+    <div class="floating-symbol symbol-5">財</div>
+  </div>
+
+  <!-- Lanterns -->
+  <div class="lantern lantern-left">
+    <div class="lantern-body">
+      <div class="lantern-text">福</div>
+      <div class="lantern-bottom"></div>
+    </div>
+    <div class="lantern-string"></div>
+  </div>
+  
+  <div class="lantern lantern-right">
+    <div class="lantern-body">
+      <div class="lantern-text">祿</div>
+      <div class="lantern-bottom"></div>
+    </div>
+    <div class="lantern-string"></div>
+  </div>
+</div>
+
+<!-- Loading overlay -->
+<div id="loadingOverlay" class="loading-overlay hidden">
+  <div class="loading-content">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">กำลังทำนาย...</div>
+  </div>
+</div>
+
+<%= javascript_import_module_tag "fortune" %>

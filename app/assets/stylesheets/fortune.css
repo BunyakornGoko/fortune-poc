@@ -1,0 +1,882 @@
+/* ===== CHINESE FORTUNE THEME - RED & GOLD ===== */
+
+/* Import Chinese fonts */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Sarabun:wght@300;400;500;600;700&display=swap");
+
+/* CSS Variables for Chinese Theme */
+:root {
+  --primary-red: #dc2626;
+  --dark-red: #991b1b;
+  --bright-red: #ef4444;
+  --gold: #f59e0b;
+  --dark-gold: #d97706;
+  --light-gold: #fcd34d;
+  --cream: #fef7cd;
+  --dark-brown: #451a03;
+  --shadow-gold: rgba(245, 158, 11, 0.3);
+  --shadow-red: rgba(220, 38, 38, 0.3);
+}
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Sarabun", "Noto Sans SC", sans-serif;
+  background: linear-gradient(
+    135deg,
+    #991b1b 0%,
+    #dc2626 25%,
+    #ef4444 50%,
+    #f59e0b 75%,
+    #dc2626 100%
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Traditional Pattern Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+      circle at 25% 25%,
+      rgba(245, 158, 11, 0.1) 0%,
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      rgba(255, 255, 255, 0.05) 0%,
+      transparent 30%
+    );
+  background-size: 100px 100px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ===== MAIN CONTAINER ===== */
+.fortune-container {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  z-index: 1;
+}
+
+/* ===== HEADER SECTION ===== */
+.header-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 3rem;
+  gap: 2rem;
+  animation: fadeInDown 1s ease-out;
+}
+
+.chinese-ornament {
+  font-size: 4rem;
+  font-weight: 900;
+  color: var(--gold);
+  text-shadow: 2px 2px 4px var(--shadow-gold), 0 0 20px var(--light-gold);
+  animation: pulse 2s ease-in-out infinite;
+  font-family: "Noto Sans SC", serif;
+}
+
+.main-title {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.chinese-text {
+  font-family: "Noto Sans SC", serif;
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--gold);
+  text-shadow: 3px 3px 6px var(--shadow-gold), 0 0 30px var(--light-gold);
+  letter-spacing: 0.2em;
+}
+
+.thai-text {
+  font-family: "Sarabun", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--cream);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.1em;
+}
+
+/* ===== FORTUNE STICK CONTAINER ===== */
+.fortune-stick-container {
+  position: relative;
+  margin-bottom: 3rem;
+  animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+.temple-background {
+  position: absolute;
+  top: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 80px;
+  background: linear-gradient(to bottom, var(--dark-brown), var(--dark-red));
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 -5px 15px var(--shadow-red);
+}
+
+.temple-background::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  height: 15px;
+  background: var(--gold);
+  border-radius: 20px;
+  box-shadow: 0 -3px 10px var(--shadow-gold);
+}
+
+.incense-smoke {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 40px;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.6), transparent);
+  border-radius: 50%;
+  animation: smoke 3s ease-in-out infinite;
+}
+
+.incense-smoke.delay-1 {
+  left: 40%;
+  animation-delay: 1s;
+}
+
+.incense-smoke.delay-2 {
+  left: 60%;
+  animation-delay: 2s;
+}
+
+@keyframes smoke {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-20px) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-40px) scale(0.8);
+  }
+}
+
+.fortune-sticks {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 0.5rem;
+  padding: 2rem;
+  background: radial-gradient(ellipse, rgba(245, 158, 11, 0.2), transparent);
+  border-radius: 20px;
+  box-shadow: inset 0 0 20px rgba(245, 158, 11, 0.3),
+    0 10px 30px var(--shadow-red);
+}
+
+.stick {
+  width: 40px;
+  height: 200px;
+  background: linear-gradient(to bottom, var(--gold), var(--dark-gold));
+  border-radius: 20px 20px 5px 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3),
+    inset 0 -20px 10px rgba(0, 0, 0, 0.1);
+  animation: stickFloat 4s ease-in-out infinite;
+  animation-delay: calc(var(--stick-index, 0) * 0.1s);
+}
+
+.stick:hover {
+  transform: translateY(-10px) rotate(2deg);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4), 0 0 20px var(--light-gold);
+}
+
+.stick-number {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: bold;
+  color: var(--dark-red);
+  font-size: 0.9rem;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes stickFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(1deg);
+  }
+}
+
+.fortune-box {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--dark-red), var(--bright-red));
+  border-radius: 10px;
+  box-shadow: 0 10px 20px var(--shadow-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box-decoration {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--gold);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-family: "Noto Sans SC", serif;
+}
+
+/* ===== ACTION SECTION ===== */
+.action-section {
+  margin-bottom: 3rem;
+  animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+.draw-fortune-btn {
+  position: relative;
+  padding: 1.5rem 3rem;
+  background: linear-gradient(135deg, var(--primary-red), var(--bright-red));
+  border: 3px solid var(--gold);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  box-shadow: 0 10px 25px var(--shadow-red),
+    inset 0 -5px 10px rgba(0, 0, 0, 0.2);
+  animation: buttonGlow 2s ease-in-out infinite;
+}
+
+.draw-fortune-btn:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 15px 35px var(--shadow-red), 0 0 30px var(--light-gold);
+}
+
+.btn-chinese {
+  display: block;
+  font-family: "Noto Sans SC", serif;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--gold);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.2em;
+}
+
+.btn-thai {
+  display: block;
+  font-family: "Sarabun", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--cream);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  margin-top: 0.2rem;
+}
+
+.btn-glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transform: rotate(45deg);
+  animation: btnShimmer 3s ease-in-out infinite;
+}
+
+@keyframes buttonGlow {
+  0%,
+  100% {
+    box-shadow: 0 10px 25px var(--shadow-red),
+      inset 0 -5px 10px rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    box-shadow: 0 10px 25px var(--shadow-red), 0 0 20px var(--light-gold),
+      inset 0 -5px 10px rgba(0, 0, 0, 0.2);
+  }
+}
+
+@keyframes btnShimmer {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  50% {
+    transform: translateX(0%) translateY(0%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+/* ===== FORTUNE RESULT ===== */
+.fortune-result {
+  animation: fadeInScale 0.8s ease-out;
+  margin-bottom: 2rem;
+}
+
+.fortune-result.hidden {
+  display: none;
+}
+
+.result-container {
+  margin-bottom: 2rem;
+}
+
+.fortune-paper {
+  background: linear-gradient(135deg, var(--cream), #fef3c7);
+  border: 3px solid var(--gold);
+  border-radius: 15px;
+  padding: 2.5rem;
+  max-width: 500px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3),
+    inset 0 0 20px rgba(245, 158, 11, 0.1);
+  position: relative;
+  animation: paperFloat 3s ease-in-out infinite;
+}
+
+.fortune-paper::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(
+    45deg,
+    var(--gold),
+    var(--light-gold),
+    var(--gold)
+  );
+  border-radius: 18px;
+  z-index: -1;
+  animation: borderGlow 2s ease-in-out infinite;
+}
+
+@keyframes paperFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes borderGlow {
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.paper-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--gold);
+}
+
+.paper-ornament {
+  color: var(--dark-red);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.paper-title {
+  font-family: "Noto Sans SC", serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--dark-red);
+  text-shadow: 1px 1px 2px var(--shadow-gold);
+}
+
+.fortune-content {
+  margin-bottom: 2rem;
+}
+
+.fortune-text {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 10px;
+  animation: textReveal 0.8s ease-out 0.5s both;
+}
+
+.fortune-text.chinese {
+  font-family: "Noto Sans SC", serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--dark-red);
+  background: rgba(245, 158, 11, 0.1);
+  letter-spacing: 0.1em;
+  line-height: 1.6;
+}
+
+.fortune-text.thai {
+  font-family: "Sarabun", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--dark-brown);
+  background: rgba(220, 38, 38, 0.1);
+  line-height: 1.7;
+}
+
+@keyframes textReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.additional-info {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem;
+  background: rgba(245, 158, 11, 0.1);
+  border-radius: 8px;
+  border-left: 4px solid var(--gold);
+}
+
+.info-label {
+  font-weight: 600;
+  color: var(--dark-red);
+  font-family: "Sarabun", sans-serif;
+}
+
+.info-value {
+  font-weight: 700;
+  color: var(--dark-brown);
+  font-family: "Sarabun", sans-serif;
+}
+
+.paper-footer {
+  text-align: center;
+  padding-top: 1rem;
+  border-top: 2px solid var(--gold);
+}
+
+.temple-seal {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, var(--dark-red), var(--primary-red));
+  color: var(--gold);
+  font-family: "Noto Sans SC", serif;
+  font-size: 2rem;
+  font-weight: 900;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 15px var(--shadow-red),
+    inset 0 0 10px rgba(245, 158, 11, 0.3);
+  animation: sealRotate 4s linear infinite;
+}
+
+@keyframes sealRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.draw-again-btn {
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+  border: 2px solid var(--dark-red);
+  border-radius: 25px;
+  color: var(--dark-red);
+  font-family: "Sarabun", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px var(--shadow-gold);
+}
+
+.draw-again-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px var(--shadow-gold);
+  background: linear-gradient(135deg, var(--light-gold), var(--gold));
+}
+
+/* ===== FLOATING ELEMENTS ===== */
+.floating-elements {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.floating-symbol {
+  position: absolute;
+  font-family: "Noto Sans SC", serif;
+  font-size: 3rem;
+  font-weight: 900;
+  color: rgba(245, 158, 11, 0.3);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  animation: float 20s linear infinite;
+}
+
+.symbol-1 {
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+.symbol-2 {
+  top: 20%;
+  right: 15%;
+  animation-delay: 4s;
+}
+.symbol-3 {
+  top: 60%;
+  left: 5%;
+  animation-delay: 8s;
+}
+.symbol-4 {
+  bottom: 20%;
+  right: 10%;
+  animation-delay: 12s;
+}
+.symbol-5 {
+  bottom: 30%;
+  left: 20%;
+  animation-delay: 16s;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translateY(-20px) rotate(90deg);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(0) rotate(180deg);
+    opacity: 0.3;
+  }
+  75% {
+    transform: translateY(-10px) rotate(270deg);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(0) rotate(360deg);
+    opacity: 0.3;
+  }
+}
+
+/* ===== LANTERNS ===== */
+.lantern {
+  position: fixed;
+  top: 5%;
+  z-index: 0;
+  animation: lanternSway 4s ease-in-out infinite;
+}
+
+.lantern-left {
+  left: 5%;
+  animation-delay: 0s;
+}
+
+.lantern-right {
+  right: 5%;
+  animation-delay: 2s;
+}
+
+.lantern-string {
+  width: 2px;
+  height: 50px;
+  background: var(--dark-brown);
+  margin: 0 auto;
+}
+
+.lantern-body {
+  width: 80px;
+  height: 120px;
+  background: linear-gradient(135deg, var(--primary-red), var(--bright-red));
+  border-radius: 40px 40px 20px 20px;
+  position: relative;
+  box-shadow: 0 10px 20px var(--shadow-red),
+    inset 0 0 20px rgba(245, 158, 11, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lantern-body::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  background: var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 -3px 8px var(--shadow-gold);
+}
+
+.lantern-text {
+  font-family: "Noto Sans SC", serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--gold);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.lantern-bottom {
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 30px;
+  background: var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 5px 10px var(--shadow-gold);
+}
+
+@keyframes lanternSway {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+/* ===== LOADING OVERLAY ===== */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.loading-overlay.hidden {
+  display: none;
+}
+
+.loading-content {
+  text-align: center;
+  color: var(--gold);
+}
+
+.loading-spinner {
+  width: 80px;
+  height: 80px;
+  border: 4px solid rgba(245, 158, 11, 0.3);
+  border-top: 4px solid var(--gold);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+.loading-text {
+  font-family: "Sarabun", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===== ANIMATION KEYFRAMES ===== */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .header-section {
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .chinese-ornament {
+    font-size: 2.5rem;
+  }
+
+  .chinese-text {
+    font-size: 2rem;
+  }
+
+  .thai-text {
+    font-size: 1.4rem;
+  }
+
+  .fortune-sticks {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.3rem;
+    padding: 1rem;
+  }
+
+  .stick {
+    width: 30px;
+    height: 150px;
+  }
+
+  .fortune-paper {
+    padding: 1.5rem;
+    margin: 0 1rem;
+  }
+
+  .lantern {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .fortune-container {
+    padding: 1rem;
+  }
+
+  .chinese-text {
+    font-size: 1.5rem;
+  }
+
+  .thai-text {
+    font-size: 1.2rem;
+  }
+
+  .fortune-sticks {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .stick {
+    width: 25px;
+    height: 120px;
+  }
+
+  .floating-symbol {
+    font-size: 2rem;
+  }
+}
