@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: fortune_db
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - fortune_data:/var/lib/postgresql/fortune_data
+
+  # web:
+  #   image: bunyakorngoko/academyfinal
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     DATABASE_URL: postgresql://academyquest_final_db_user:fandG63ltRVPXNfZ1mMqxAjVdqt0R7NL@dpg-d0nabmmmcj7s73dp6j40-a.singapore-postgres.render.com/academyquest_final_db
+  #     SECRET_KEY_BASE: 4w4a7eIC3YAndFsj1wninvrqUqKhOQTf4lpZnWazz937jpwnM2IznY3hoBg/VyLK48hAwpGrIjPHJZm7+5YPfgSZVrbSmtAl2EDNMad0mTMsZ+ZQPHmyk74Pi3jqD7+FGLe5SRTGak3dWJIUf6eHGti30cNEoFiGRopYlhQZotwLpuiYIjpHhfZVRmfzWyLulrQcrBZ87LtnqNaeE2iqtJ03XITudR14eJfKL6ELOJ703Q8ka/R9Frn3BYtTV0UceoBjE5f6Pdx892hTdxfYasBEeGGLF8J2iMWaLGJBOtKsX8C/GBTqzFvnuYpkOsTMJSiAh4ea3F8I49/ZS48RNj2e6oPZAfT0RYul93jHLNVoQC0verKeFIaWzTWqP44q0U03xSxGp2u8Eqe0Lhuqh4eUCga9Zq+L9PgTFG8H7kCayAjE0NyxVPVDSqQybaiJPTJmXVR/2iH8JT+7xD88Ndl2Lf8wyst8yLhv0TMdsWDa1DgfIRHfCivU--fQK7DM2DNvYbsOjz--+1gosr4ZUQt/SR49rbCRlw==
+
+volumes:
+  fortune_data:
