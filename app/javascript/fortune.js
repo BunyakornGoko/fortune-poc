@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const fortuneSticks = document.getElementById("fortuneSticks")
   const chineseText = document.getElementById("chineseText")
   const thaiText = document.getElementById("thaiText")
+  const prizeNumber = document.getElementById("prizeNumber")
   const luckyColor = document.getElementById("luckyColor")
   const luckyNumbers = document.getElementById("luckyNumbers")
 
@@ -189,6 +190,7 @@ document.addEventListener("DOMContentLoaded", function () {
       await typewriterEffect(thaiText, data.thai_fortune, 60)
 
       // Show additional info with stagger animation
+      prizeNumber.textContent = data.prize_number
       luckyColor.textContent = data.lucky_color
       luckyNumbers.textContent = data.lucky_numbers.join(", ")
 

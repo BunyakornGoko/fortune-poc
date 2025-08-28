@@ -51,11 +51,15 @@ class FortuneController < ApplicationController
     # สุ่มตัวเลขโชคดี
     lucky_numbers = Array.new(6) { rand(1..49) }.uniq.sort
     
+    # สุ่มหมายเลขของรางวัล (1-50 ชิ้น)
+    prize_number = rand(1..50)
+    
     render json: {
       thai_fortune: thai_fortune,
       chinese_fortune: chinese_fortune,
       lucky_color: lucky_color,
-      lucky_numbers: lucky_numbers
+      lucky_numbers: lucky_numbers,
+      prize_number: prize_number
     }
   end
 end

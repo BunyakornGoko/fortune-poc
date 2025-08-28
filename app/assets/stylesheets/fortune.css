@@ -516,6 +516,99 @@ body::before {
   font-family: "Sarabun", sans-serif;
 }
 
+.prize-number {
+  background: linear-gradient(135deg, var(--primary-red), var(--bright-red));
+  color: var(--gold) !important;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  font-size: 1.6rem !important;
+  font-weight: 900 !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 15px var(--shadow-red),
+    inset 0 0 15px rgba(245, 158, 11, 0.3);
+  animation: prizeNumberGlow 2s ease-in-out infinite;
+  border: 3px solid var(--gold);
+  min-width: 70px;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+}
+
+.prize-number::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(
+    45deg,
+    var(--gold),
+    var(--light-gold),
+    var(--gold)
+  );
+  border-radius: 28px;
+  z-index: -1;
+  animation: borderRotate 3s linear infinite;
+}
+
+@keyframes prizeNumberGlow {
+  0%,
+  100% {
+    box-shadow: 0 4px 15px var(--shadow-red),
+      inset 0 0 15px rgba(245, 158, 11, 0.3);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 4px 15px var(--shadow-red), 0 0 20px var(--light-gold),
+      inset 0 0 15px rgba(245, 158, 11, 0.5);
+    transform: scale(1.05);
+  }
+}
+
+@keyframes borderRotate {
+  0% {
+    background: linear-gradient(
+      0deg,
+      var(--gold),
+      var(--light-gold),
+      var(--gold)
+    );
+  }
+  25% {
+    background: linear-gradient(
+      90deg,
+      var(--gold),
+      var(--light-gold),
+      var(--gold)
+    );
+  }
+  50% {
+    background: linear-gradient(
+      180deg,
+      var(--gold),
+      var(--light-gold),
+      var(--gold)
+    );
+  }
+  75% {
+    background: linear-gradient(
+      270deg,
+      var(--gold),
+      var(--light-gold),
+      var(--gold)
+    );
+  }
+  100% {
+    background: linear-gradient(
+      360deg,
+      var(--gold),
+      var(--light-gold),
+      var(--gold)
+    );
+  }
+}
+
 .paper-footer {
   text-align: center;
   padding-top: 1rem;
