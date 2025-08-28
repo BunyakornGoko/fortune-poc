@@ -17,11 +17,12 @@ help:
 	@echo "  make server       - รันเซิร์ฟเวอร์ production"
 	@echo "  make help         - แสดงคำสั่งนี้"
 
+down-up-db:
+	docker compose down
+	docker compose up -d
 # รีเซ็ตฐานข้อมูลทั้งหมด
 db-reset:
 	@echo "🔄 กำลังรีเซ็ตฐานข้อมูล..."
-	docker compose down
-	docker compose up -d
 	bundle exec rails db:drop
 	bundle exec rails db:create
 	bundle exec rails db:migrate
