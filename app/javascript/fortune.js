@@ -14,6 +14,16 @@ document.addEventListener("DOMContentLoaded", function () {
   const luckyColor = document.getElementById("luckyColor")
   const luckyNumbers = document.getElementById("luckyNumbers")
 
+  // Admin Panel Elements
+  const adminToggle = document.getElementById("adminToggle")
+  const adminContent = document.getElementById("adminContent")
+  const adminClose = document.getElementById("adminClose")
+  const deleteBtn = document.getElementById("deleteBtn")
+  const deleteNumberInput = document.getElementById("deleteNumber")
+  const resetBtn = document.getElementById("resetBtn")
+  const remainingCountElement = document.getElementById("remainingCount")
+  const adminMessage = document.getElementById("adminMessage")
+
   // Sound effects (optional - can be added later)
   const playSound = (type) => {
     // Placeholder for sound effects
@@ -202,6 +212,11 @@ document.addEventListener("DOMContentLoaded", function () {
       prizeNumber.textContent = data.prize_number
       luckyColor.textContent = data.lucky_color
       luckyNumbers.textContent = data.lucky_numbers.join(", ")
+
+      // Update remaining count in admin panel
+      if (data.remaining_prizes !== undefined) {
+        updateRemainingCount(data.remaining_prizes)
+      }
 
       // Animate additional info items
       const infoItems = document.querySelectorAll(".info-item")
@@ -448,6 +463,97 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && !fortuneResult.classList.contains("hidden")) {
       resetFortune()
+    }
+  })
+
+  // ===== ADMIN PANEL FUNCTIONS =====
+
+  // Show admin message
+  const showAdminMessage = (message, isError = false) => {
+    adminMessage.textContent = message
+    adminMessage.className = `admin-message ${isError ? "error" : "success"}`
+    adminMessage.style.display = "block"
+
+    setTimeout(() => {
+      adminMessage.style.display = "none"
+    }, 3000)
+  }
+
+  // Update remaining count display
+  const updateRemainingCount = (count) => {
+    remainingCountElement.textContent = count
+  }
+
+  // Toggle admin panel
+  adminToggle.addEventListener("click", () => {
+    adminContent.classList.toggle("show")
+  })
+
+  // Close admin panel
+  adminClose.addEventListener("click", () => {
+    adminContent.classList.remove("show")
+  })
+
+  // Delete specific number
+  deleteBtn.addEventListener("click", async () => {
+    const numberToDelete = deleteNumberInput.value.trim()
+
+    if (!numberToDelete) {
+      showAdminMessage("กรุณาใส่หมายเลขที่ต้องการลบ", true)
+      return
+    }
+
+    const number = parseInt(numberToDelete)
+    if (number < 1 || number > 100) {
+      showAdminMessage("กรุณาใส่หมายเลขระหว่าง 1-100", true)
+      return
+    }
+
+    try {
+      deleteBtn.disabled = true
+      deleteBtn.textContent = "กำลังลบ..."
+
+      const response = await fetch("/fortune/delete_number", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-Token": document
+            .querySelector('meta[name="csrf-token"]')
+            .getAttribute("content")
+        },
+        body: JSON.stringify({ number: number })
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        showAdminMessage(data.message, false)
+        updateRemainingCount(data.remaining_prizes)
+        deleteNumberInput.value = ""
+      } else {
+        showAdminMessage(data.message, true)
+      }
+    } catch (error) {
+      console.error("Error deleting number:", error)
+      showAdminMessage("เกิดข้อผิดพลาดในการลบ", true)
+    } finally {
+      deleteBtn.disabled = false
+      deleteBtn.textContent = "ลบ"
+    }
+  })
+
+
+  // Allow Enter key to delete number
+  deleteNumberInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      deleteBtn.click()
+    }
+  })
+
+  // Close admin panel when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!adminToggle.contains(e.target) && !adminContent.contains(e.target)) {
+      adminContent.classList.remove("show")
     }
   })
 

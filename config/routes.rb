@@ -14,5 +14,6 @@ Rails.application.routes.draw do
   get "fortune" => "fortune#index"
   post "fortune/draw" => "fortune#draw"
   post "fortune/reset" => "fortune#reset_numbers"
+  delete "fortune/delete_number" => "fortune#delete_number"
   get "fortune/status" => "fortune#status"
 end

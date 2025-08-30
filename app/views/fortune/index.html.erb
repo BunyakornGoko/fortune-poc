@@ -109,6 +109,40 @@
     </div>
     <div class="lantern-string"></div>
   </div>
+
+  <!-- Admin Panel -->
+  <div class="admin-panel">
+    <div class="admin-toggle" id="adminToggle">
+      <span class="admin-icon">⚙️</span>
+    </div>
+    
+    <div class="admin-content" id="adminContent">
+      <div class="admin-header">
+        <h3>จัดการตัวเลข</h3>
+        <button class="admin-close" id="adminClose">×</button>
+      </div>
+      
+      <div class="admin-stats">
+        <div class="stat-item">
+          <span class="stat-label">เหลืออยู่:</span>
+          <span class="stat-value" id="remainingCount"><%= @remaining_count %></span>
+          <span class="stat-unit">ตัว</span>
+        </div>
+      </div>
+      
+      <div class="admin-actions">
+        <div class="delete-section">
+          <label for="deleteNumber">ลบตัวเลข:</label>
+          <div class="input-group">
+            <input type="number" id="deleteNumber" min="1" max="100" placeholder="1-100">
+            <button id="deleteBtn" class="delete-btn">ลบ</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="admin-message" id="adminMessage"></div>
+    </div>
+  </div>
 </div>
 
 <!-- Loading overlay -->

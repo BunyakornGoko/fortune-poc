@@ -85,6 +85,35 @@ class FortuneController < ApplicationController
     }
   end
 
+  # ฟังก์ชันลบตัวเลขเฉพาะ
+  def delete_number
+    number = params[:number].to_i
+    
+    if number < 1 || number > 100
+      render json: {
+        success: false,
+        message: "กรุณาใส่หมายเลขระหว่าง 1-100"
+      }
+      return
+    end
+    
+    fortune_number = FortuneNumber.find_by(number: number)
+    
+    if fortune_number
+      fortune_number.destroy!
+      render json: {
+        success: true,
+        message: "ลบหมายเลข #{number} เรียบร้อยแล้ว",
+        remaining_prizes: FortuneNumber.remaining_count
+      }
+    else
+      render json: {
+        success: false,
+        message: "ไม่พบหมายเลข #{number} ในระบบ (อาจถูกลบไปแล้ว)"
+      }
+    end
+  end
+
   # ฟังก์ชันเช็คสถานะหมายเลขที่เหลือ
   def status
     render json: {
