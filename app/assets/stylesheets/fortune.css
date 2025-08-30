@@ -1283,18 +1283,23 @@ body::before {
   justify-content: center;
   cursor: pointer;
   box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-  transition: all 0.3s ease;
+  transition: none;
   border: 2px solid #b8860b;
 }
 
 .admin-toggle:hover {
-  transform: scale(1.1);
+  transform: none;
   box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
 }
 
 .admin-icon {
   font-size: 1.5rem;
-  animation: rotate 2s linear infinite;
+  animation: none;
+  font-family: "Noto Sans SC", serif;
+  font-weight: 900;
+  color: #8b4513;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  line-height: 1;
 }
 
 @keyframes rotate {
