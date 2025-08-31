@@ -1,6 +1,35 @@
 // ===== CHINESE FORTUNE TELLER JAVASCRIPT =====
 
 document.addEventListener("DOMContentLoaded", function () {
+  // Background Music Control
+  const bgMusic = document.getElementById("bgMusic")
+  const musicToggle = document.getElementById("musicToggle")
+  let isMusicPlaying = false
+
+  const toggleMusic = () => {
+    if (isMusicPlaying) {
+      bgMusic.pause()
+      musicToggle.classList.add("muted")
+    } else {
+      bgMusic.play()
+      musicToggle.classList.remove("muted")
+    }
+    isMusicPlaying = !isMusicPlaying
+  }
+
+  musicToggle.addEventListener("click", toggleMusic)
+
+  // Auto-play music when user interacts with the page
+  document.addEventListener(
+    "click",
+    function initMusic() {
+      if (!isMusicPlaying) {
+        toggleMusic()
+      }
+      document.removeEventListener("click", initMusic)
+    },
+    { once: true }
+  )
   // DOM Elements
   const drawFortuneBtn = document.getElementById("drawFortuneBtn")
   const drawAgainBtn = document.getElementById("drawAgainBtn")
@@ -541,7 +570,6 @@ document.addEventListener("DOMContentLoaded", function () {
       deleteBtn.textContent = "ลบ"
     }
   })
-
 
   // Allow Enter key to delete number
   deleteNumberInput.addEventListener("keypress", (e) => {

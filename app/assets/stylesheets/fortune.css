@@ -1,5 +1,39 @@
 /* ===== CHINESE FORTUNE THEME - RED & GOLD ===== */
 
+/* Music Control Button */
+.music-control {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(220, 38, 38, 0.9);
+  border: 2px solid #fcd34d;
+  color: #fcd34d;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.music-control:hover {
+  transform: scale(1.1);
+  background: rgba(220, 38, 38, 1);
+  box-shadow: 0 4px 15px rgba(252, 211, 77, 0.3);
+}
+
+.music-control.muted .music-icon {
+  opacity: 0.5;
+}
+
+.music-control:active {
+  transform: scale(0.95);
+}
+
 /* Import Chinese fonts */
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Sarabun:wght@300;400;500;600;700&display=swap");
 
