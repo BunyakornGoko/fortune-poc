@@ -101,3 +101,6 @@ prepare:
 	make install
 	make db-reset
 	@echo "✅ เตรียมพร้อมเสร็จแล้ว! ใช้ 'make dev' เพื่อรันเซิร์ฟเวอร์"
+
+run:
+	bin/dev
