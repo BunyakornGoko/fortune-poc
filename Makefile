@@ -17,6 +17,12 @@ help:
 	@echo "  make server       - รันเซิร์ฟเวอร์ production"
 	@echo "  make help         - แสดงคำสั่งนี้"
 
+up:
+	docker compose up -d
+	
+down:
+	docker compose down
+
 down-up-db:
 	docker compose down
 	docker compose up -d
