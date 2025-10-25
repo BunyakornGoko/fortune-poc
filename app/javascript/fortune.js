@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const fortuneResult = document.getElementById("fortuneResult")
   const loadingOverlay = document.getElementById("loadingOverlay")
   const fortuneSticks = document.getElementById("fortuneSticks")
+  const categorySelect = document.getElementById("categorySelect")
   const chineseText = document.getElementById("chineseText")
   const thaiText = document.getElementById("thaiText")
   const prizeNumber = document.getElementById("prizeNumber")
@@ -209,7 +210,10 @@ document.addEventListener("DOMContentLoaded", function () {
           "X-CSRF-Token": document
             .querySelector('meta[name="csrf-token"]')
             ?.getAttribute("content")
-        }
+        },
+        body: JSON.stringify({
+          category: categorySelect?.value || "study"
+        })
       })
 
       if (!response.ok) {
