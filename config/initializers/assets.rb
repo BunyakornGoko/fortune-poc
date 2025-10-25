@@ -13,4 +13,4 @@ Rails.application.config.assets.paths << Rails.root.join("node_modules")
 Rails.application.config.assets.paths << Rails.root.join("app", "assets", "sounds")
 
 # Precompile additional assets.
-Rails.application.config.assets.precompile += %w( *.mp3 )
+Rails.application.config.assets.precompile += %w( *.mp3 fortune.css )

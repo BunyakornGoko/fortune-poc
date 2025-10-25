@@ -384,6 +384,74 @@ body::before {
 .action-section {
   margin-bottom: 3rem;
   animation: fadeInUp 1s ease-out 0.6s both;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* ===== CATEGORY SECTION ===== */
+.category-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+.category-label {
+  font-family: "Sarabun", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--cream);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.05em;
+}
+
+.category-select {
+  position: relative;
+  padding: 0.8rem 2.5rem 0.8rem 1.5rem;
+  font-family: "Sarabun", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--cream);
+  background: linear-gradient(135deg, var(--cream), #fef3c7);
+  border: 3px solid var(--gold);
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px var(--shadow-gold),
+    inset 0 2px 4px rgba(255, 255, 255, 0.5);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  min-width: 200px;
+  text-align: center;
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L6 6L11 1" stroke="%23991b1b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 12px;
+}
+
+.category-select:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px var(--shadow-gold), 0 0 20px var(--light-gold),
+    inset 0 2px 4px rgba(255, 255, 255, 0.5);
+  border-color: var(--light-gold);
+}
+
+.category-select:focus {
+  outline: none;
+  box-shadow: 0 6px 20px var(--shadow-gold), 0 0 30px var(--light-gold),
+    inset 0 2px 4px rgba(255, 255, 255, 0.5);
+  border-color: var(--light-gold);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.category-select option {
+  background: var(--cream);
+  color: var(--dark-brown);
+  padding: 0.8rem;
+  font-weight: 600;
 }
 
 .draw-fortune-btn {
@@ -1270,6 +1338,16 @@ body::before {
   .lantern {
     display: none;
   }
+
+  .category-label {
+    font-size: 1rem;
+  }
+
+  .category-select {
+    font-size: 0.95rem;
+    min-width: 180px;
+    padding: 0.7rem 2rem 0.7rem 1.2rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1296,6 +1374,16 @@ body::before {
 
   .floating-symbol {
     font-size: 2rem;
+  }
+
+  .category-label {
+    font-size: 0.9rem;
+  }
+
+  .category-select {
+    font-size: 0.9rem;
+    min-width: 160px;
+    padding: 0.6rem 1.8rem 0.6rem 1rem;
   }
 }
 
