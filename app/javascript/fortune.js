@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const sticks = document.querySelectorAll(".stick")
     let selectedSticks = []
     let animationCount = 0
-    const maxAnimations = 15 // Number of random selections before final selection
+    const maxAnimations = 20 // Number of random selections before final selection
 
     return new Promise((resolve) => {
       const interval = setInterval(() => {
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 1000)
           }, 500)
         }
-      }, 100)
+      }, 150)
     })
   }
 
