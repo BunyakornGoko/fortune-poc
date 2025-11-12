@@ -181,8 +181,38 @@ document.addEventListener("DOMContentLoaded", function () {
     })
   }
 
+  // Check if prizes are available
+  const checkPrizeAvailability = async () => {
+    try {
+      const response = await fetch("/fortune/status")
+      const data = await response.json()
+
+      if (!data.has_prizes) {
+        drawFortuneBtn.disabled = true
+        drawFortuneBtn.style.opacity = "0.5"
+        drawFortuneBtn.style.cursor = "not-allowed"
+        drawFortuneBtn.innerHTML = `
+          <span class="btn-chinese">已完</span>
+          <span class="btn-thai">ของรางวัลหมดแล้ว</span>
+        `
+        return false
+      }
+      return true
+    } catch (error) {
+      console.error("Error checking prize availability:", error)
+      return true // Allow drawing on error to prevent blocking
+    }
+  }
+
   // Fortune drawing function
   const drawFortune = async () => {
+    // Check if prizes are available before drawing
+    const canDraw = await checkPrizeAvailability()
+    if (!canDraw) {
+      alert("ของรางวัลหมดแล้ว! กรุณาติดต่อผู้ดูแลระบบ")
+      return
+    }
+
     try {
       // Disable button and show loading
       drawFortuneBtn.disabled = true
@@ -225,6 +255,26 @@ document.addEventListener("DOMContentLoaded", function () {
       // Hide loading
       loadingOverlay.classList.add("hidden")
 
+      // Check if drawing was successful
+      if (!data.success) {
+        alert(data.message || "ของรางวัลหมดแล้ว! กรุณาติดต่อผู้ดูแลระบบ")
+
+        // Disable the button and update UI
+        drawFortuneBtn.disabled = true
+        drawFortuneBtn.style.opacity = "0.5"
+        drawFortuneBtn.style.cursor = "not-allowed"
+        drawFortuneBtn.innerHTML = `
+          <span class="btn-chinese">已完</span>
+          <span class="btn-thai">ของรางวัลหมดแล้ว</span>
+        `
+
+        // Update remaining count
+        if (data.remaining_prizes !== undefined) {
+          updateRemainingCount(data.remaining_prizes)
+        }
+        return
+      }
+
       // Create particle explosion effect
       createParticleExplosion(drawFortuneBtn)
       playSound("fortuneRevealed")
@@ -249,6 +299,17 @@ document.addEventListener("DOMContentLoaded", function () {
       // Update remaining count in admin panel
       if (data.remaining_prizes !== undefined) {
         updateRemainingCount(data.remaining_prizes)
+
+        // Check if this was the last prize
+        if (data.remaining_prizes === 0) {
+          drawFortuneBtn.disabled = true
+          drawFortuneBtn.style.opacity = "0.5"
+          drawFortuneBtn.style.cursor = "not-allowed"
+          drawFortuneBtn.innerHTML = `
+            <span class="btn-chinese">已完</span>
+            <span class="btn-thai">ของรางวัลหมดแล้ว</span>
+          `
+        }
       }
 
       // Animate additional info items
@@ -597,6 +658,9 @@ document.addEventListener("DOMContentLoaded", function () {
   addSparkleCSS()
   addAmbientCSS()
   createAmbientEffect()
+
+  // Check prize availability on page load
+  checkPrizeAvailability()
 
   // Add welcome animation
   setTimeout(() => {
